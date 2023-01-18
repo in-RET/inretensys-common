@@ -1,0 +1,73 @@
+version: "3.8"
+services:
+    fastapi:
+        build: ./inretensys-fastapi/
+        container_name: gui_fastapi
+        expose:
+            - 8001
+        ports:
+            - "8001:8001"
+        working_dir: /fastapi
+        volumes:
+            - ./inretensys-fastapi:/fastapi
+        command: ["python", "-m", "uvicorn", "api.api:app", "--host", "0.0.0.0", "--port", "8001"]
+        networks:
+            - network_intern
+    db:
+        image: 'postgres:latest'
+        expose:
+            - 5432
+        ports:
+            - "5432:5432"
+        env_file:
+            - ./inretensys-gui/.envs/epa.postgres
+        volumes:
+            - ./db-data/:/var/lib/postgresql/data/
+        networks:
+            - network_intern
+    app:
+        build:
+            context: ./inretensys-gui/app
+            dockerfile: ./compose/production/app_postgres/Dockerfile
+        container_name: gui_app
+        restart: always
+        env_file:
+            - ./inretensys-gui/.envs/epa.postgres
+        expose:
+            - 8000
+        volumes:
+            - static_volume:/src/cdn_static_root
+        command: "python manage.py runserver 0.0.0.0:8000"
+        networks:
+            - network_intern
+    nginx_pg:
+        image: nginx:1.21-alpine
+        container_name: gui_ngx
+        restart: always
+        ports:
+            - "8080:80"
+        volumes:
+            - ./inretensys-gui/nginx/postgres:/etc/nginx/conf.d
+            - static_volume:/static
+        depends_on:
+            - app
+        networks:
+            - network_intern
+    pgadmin:
+        container_name: pgadmin4
+        image: dpage/pgadmin4
+        restart: always
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@admin.com
+            PGADMIN_DEFAULT_PASSWORD: root
+        ports:
+            - "5050:80"
+        networks:
+            - network_intern
+
+    volumes:
+        db_data:
+        static_volume:
+
+    networks:
+        network_intern:
