@@ -14,13 +14,14 @@ services:
         networks:
             - network_intern
     db:
-        image: 'postgres:latest'
+        image: 'postgres:latest'        
+        container_name: gui_db
         expose:
             - 5432
         ports:
             - "5432:5432"
         env_file:
-            - ./inretensys-gui/.envs/epa.postgres
+            - ./inretensys-gui/.envs/db.postgres
         volumes:
             - ./db-data/:/var/lib/postgresql/data/
         networks:
@@ -65,9 +66,9 @@ services:
         networks:
             - network_intern
 
-    volumes:
-        db_data:
-        static_volume:
+volumes:
+    db_data:
+    static_volume:
 
-    networks:
-        network_intern:
+networks:
+    network_intern:
