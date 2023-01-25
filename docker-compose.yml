@@ -5,8 +5,6 @@ services:
         container_name: gui_fastapi
         expose:
             - 8001
-        ports:
-            - "8001:8001"
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - ./inretensys-fastapi/api:/app/api
@@ -54,18 +52,18 @@ services:
             - app
         networks:
             - network_intern
-    pgadmin:
-        image: dpage/pgadmin4
-
-        container_name: pgadmin4
-        restart: always
-        environment:
-            PGADMIN_DEFAULT_EMAIL: admin@admin.com
-            PGADMIN_DEFAULT_PASSWORD: root
-        ports:
-            - "5050:80"
-        networks:
-            - network_intern
+#    pgadmin:
+#        image: dpage/pgadmin4
+#
+#        container_name: pgadmin4
+#        restart: always
+#        environment:
+#            PGADMIN_DEFAULT_EMAIL: admin@admin.com
+#            PGADMIN_DEFAULT_PASSWORD: root
+#        ports:
+#            - "5050:80"
+#        networks:
+#            - network_intern
 
 volumes:
     db_data:
