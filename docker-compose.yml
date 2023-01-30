@@ -3,12 +3,14 @@ services:
     fastapi:
         build: ./inretensys-fastapi/
         container_name: gui_fastapi
+        env_file:
+            - ./inretensys-fastapi/.env
         expose:
             - 8001
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - ./inretensys-fastapi/api:/app/api
-            - /home/pyrokar/scratch4:/app/working
+            - /home/pyrokar/scratch5:/app/working
         command: ["python", "-m", "uvicorn", "api.api:app", "--host", "0.0.0.0", "--port", "8001"]
         networks:
             - network_intern
