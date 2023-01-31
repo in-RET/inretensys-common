@@ -14,6 +14,7 @@ services:
             - ./inretensys-fastapi/api:/app/api
             - /home/pyrokar/scratch5:/app/working
         command: ["python", "-m", "uvicorn", "api.api:app", "--host", "0.0.0.0", "--port", "8001"]
+        #command: gunicorn api.api:app --workers=4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8001
         networks:
             - network_intern
     db:
@@ -40,8 +41,8 @@ services:
             - 8000
         volumes:
             - static_volume:/src/cdn_static_root
-        #command: "python manage.py runserver 0.0.0.0:8000"
-        command: "gunicorn --workers=2 --bind=0.0.0.0:8000 epa.wsgi:application"
+        command: "python manage.py runserver 0.0.0.0:8000"
+        #command: "gunicorn --workers=4 --bind=0.0.0.0:8000 epa.wsgi:application"
         networks:
             - network_intern
 #    djangoq:
@@ -71,6 +72,7 @@ services:
         volumes:
             - ./inretensys-gui/nginx/postgres:/etc/nginx/conf.d
             - static_volume:/static
+            - /home/pyrokar/scratch5:/static/working
         depends_on:
             - app
         networks:
