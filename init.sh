@@ -1,5 +1,5 @@
 echo -e "\e[32mClone Repositories ... \e[39m"
-git clone --branch feature_fastapi_anbindung https://github.com/in-RET/in.RET-EnSys-open-plan-GUI.git "inretensys-gui"
+git clone https://github.com/in-RET/in.RET-EnSys-open-plan-GUI.git "inretensys-gui"
 git clone https://github.com/in-RET/inretensys-fastapi.git
 git clone https://github.com/in-RET/inretensys-backend.git
 
