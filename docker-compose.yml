@@ -5,6 +5,8 @@ services:
         container_name: gui_fastapi
         env_file:
             - ./inretensys-fastapi/.env
+        ports:
+            - "8001:8001"
         expose:
             - 8001
         volumes:
