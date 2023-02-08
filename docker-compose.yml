@@ -7,22 +7,18 @@ services:
             - ./inretensys-fastapi/.env
         ports:
             - "8001:8001"
-        expose:
-            - 8001
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - ./inretensys-fastapi/api:/app/api
             - /home/pyrokar/scratch5:/app/working
-        command: ["python", "-m", "uvicorn", "api.api:app", "--host", "0.0.0.0", "--port", "8001"]
-        #command: gunicorn api.api:app --workers=4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8001
+        #command: ["python", "-m", "uvicorn", "api.api:app", "--host", "0.0.0.0", "--port", "8001"]
+        command: ["gunicorn", "api.api:app", "--workers", "4", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8001"]
         networks:
             - network_intern
     db:
         image: 'postgres:latest'        
         container_name: gui_db
         restart: always
-        expose:
-            - 5432
         env_file:
             - ./inretensys-gui/.envs/db.postgres
         volumes:
@@ -37,13 +33,11 @@ services:
         restart: always
         env_file:
             - ./inretensys-gui/.envs/epa.postgres
-        expose:
-            - 8000
         volumes:
             - static_volume:/src/cdn_static_root
             - /home/pyrokar/scratch5:/src/dumps
-        command: "python manage.py runserver 0.0.0.0:8000"
-        #command: "gunicorn --workers=4 --bind=0.0.0.0:8000 epa.wsgi:application"
+        #command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+        command: ["gunicorn", "epa.asgi:application", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8000"]
         networks:
             - network_intern
 #    djangoq:
