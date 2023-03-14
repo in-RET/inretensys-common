@@ -19,8 +19,14 @@ pip install build wheel
 python -m build --wheel
 
 deactivate
+
+echo -e "\e[32mBuild docker images ... \e[39m"
+chmod+x build.sh
+bash build.sh
+
 cd ..
 
 echo -e "\e[32mCopy generated wheel-file ... \e[39m"
 cp inretensys-backend/dist/InRetEnsys-0.2a4-py3-none-any.whl inretensys-fastapi/
 cp inretensys-backend/dist/InRetEnsys-0.2a4-py3-none-any.whl inretensys-gui/app/
+
