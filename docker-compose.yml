@@ -40,6 +40,20 @@ services:
         #command: ["gunicorn", "epa.asgi:application", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8000"]
         networks:
             - network_intern
+    nginx:
+        image: nginx:1.21-alpine
+        container_name: gui_ngx
+        restart: always
+        ports:
+            - "80:80"
+        volumes:
+            - ./inretensys-gui/nginx/postgres:/etc/nginx/conf.d
+            - static_volume:/static
+            - /home/pyrokar/scratch5:/static/working
+        depends_on:
+            - app
+        networks:
+            - network_intern
 #    djangoq:
 #        build:
 #            context: ./inretensys-gui/app
@@ -58,20 +72,6 @@ services:
 #            - app
 #        networks:
 #            - network_intern
-    nginx:
-        image: nginx:1.21-alpine
-        container_name: gui_ngx
-        restart: always
-        ports:
-            - "80:80"
-        volumes:
-            - ./inretensys-gui/nginx/postgres:/etc/nginx/conf.d
-            - static_volume:/static
-            - /home/pyrokar/scratch5:/static/working
-        depends_on:
-            - app
-        networks:
-            - network_intern
 #    pgadmin:
 #        image: dpage/pgadmin4
 #        container_name: pgadmin4
