@@ -1,4 +1,5 @@
 echo -e "\e[32mClone Repositories ... \e[39m"
+cd services
 git clone https://github.com/in-RET/in.RET-EnSys-open-plan-GUI.git "inretensys-gui"
 git clone https://github.com/in-RET/inretensys-fastapi.git
 git clone https://github.com/in-RET/inretensys-backend.git
@@ -27,6 +28,6 @@ bash build.sh
 cd ..
 
 echo -e "\e[32mCopy generated wheel-file ... \e[39m"
-cp inretensys-backend/dist/InRetEnsys-0.2a4-py3-none-any.whl inretensys-fastapi/
-cp inretensys-backend/dist/InRetEnsys-0.2a4-py3-none-any.whl inretensys-gui/app/
+cp inretensys-backend/dist/InRetEnsys-0.2a5-py3-none-any.whl inretensys-fastapi/
+cp inretensys-backend/dist/InRetEnsys-0.2a5-py3-none-any.whl inretensys-gui/app/
 
