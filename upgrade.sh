@@ -1,4 +1,6 @@
 echo -e "\e[32mUpgrade Backend ... \e[39m"
+cd services
+
 cd inretensys-backend
 git pull
 
@@ -13,8 +15,8 @@ bash build.sh
 cd ..
 
 echo -e "\e[32mCopy generated wheel-file ... \e[39m"
-cp inretensys-backend/dist/InRetEnsys-0.2a4-py3-none-any.whl inretensys-fastapi/
-cp inretensys-backend/dist/InRetEnsys-0.2a4-py3-none-any.whl inretensys-gui/app/
+cp inretensys-backend/dist/InRetEnsys-0.2a5-py3-none-any.whl inretensys-fastapi/
+cp inretensys-backend/dist/InRetEnsys-0.2a5-py3-none-any.whl inretensys-gui/app/
 
 echo -e "\e[32mUpgrade GUI ... \e[39m"
 cd inretensys-gui
