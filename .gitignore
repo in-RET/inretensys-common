@@ -131,5 +131,6 @@ dmypy.json
 # In.RET Datafolders
 data/
 inretensys-*
-postgres/
-pgadmin/
+postgres-data/
+pgadmin-data/
+static-data/
