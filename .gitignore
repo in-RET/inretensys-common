@@ -130,7 +130,7 @@ dmypy.json
 
 # In.RET Datafolders
 data/
-inretensys-*
-postgres-data/
-pgadmin-data/
-static-data/
+
+services/backend
+services/fastapi
+services/gui
