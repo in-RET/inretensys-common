@@ -1,10 +1,10 @@
 version: '3.8'
 services:
     fastapi:
-        build: ./services/inretensys-fastapi/
+        build: ./services/fastapi/
         container_name: gui_fastapi
         env_file:
-            - ./services/inretensys-fastapi/.env
+            - ./services/fastapi/.env
         ports:
             - "${FASTAPI_PORT}:8001"
         volumes:
@@ -45,7 +45,7 @@ services:
             - network_intern
     app:
         build:
-            context: ./services/inretensys-gui/app
+            context: ./services/gui/app
             dockerfile: ./dockerfile
         container_name: gui_app
         restart: always
@@ -75,12 +75,12 @@ services:
             - network_intern
 #    djangoq:
 #        build:
-#            context: ./inretensys-gui/app
+#            context: ./gui/app
 #            dockerfile: ./compose/production/app_postgres/dockerfile
 #        container_name: gui_queue
 #        restart: always
 #        env_file:
-#            - ./inretensys-gui/.envs/epa.postgres
+#            - ./gui/.envs/epa.postgres
 #        command: python manage.py qcluster
 #        volumes:
 #            - .:/code
