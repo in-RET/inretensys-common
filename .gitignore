@@ -131,6 +131,6 @@ dmypy.json
 # In.RET Datafolders
 data/
 
-services/backend
-services/fastapi
-services/gui
+*/backend/*
+*/fastapi/*
+*/gui/*
