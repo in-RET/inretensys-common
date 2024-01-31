@@ -5,8 +5,6 @@ services:
         container_name: ensys_fastapi
         env_file:
             - ./services/fastapi/.env
-        ports:
-            - "${FASTAPI_PORT}:8001"
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - ${LOCAL_WORKDIR}:/app/working
@@ -20,6 +18,8 @@ services:
         restart: always
         env_file:
             - ./.env
+        ports:
+          - "${ENSYS_PORT}:8000"
         volumes:
             - static_volume:/src/cdn_static_root
             - ${LOCAL_WORKDIR}:/src/dumps
