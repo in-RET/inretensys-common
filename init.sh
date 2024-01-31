@@ -11,8 +11,8 @@ cd backend
 
 # create environment
 echo -e "\e[32mCreate virtual environment and build wheel-file ... \e[39m"
-python3 -m venv venv
-source venv/bin/activate
+conda create -n "EnSys" python=3.10
+conda activate EnSys
 
 # install requirements
 pip install -r requirements.txt

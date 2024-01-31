@@ -23,6 +23,7 @@ services:
         volumes:
             - static_volume:/src/cdn_static_root
             - ${LOCAL_WORKDIR}:/src/dumps
+        command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
         depends_on:
             - fastapi
         networks:
