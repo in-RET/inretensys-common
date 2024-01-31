@@ -15,8 +15,8 @@ bash build.sh
 cd ..
 
 echo -e "\e[32mCopy generated wheel-file ... \e[39m"
-cp backend/dist/InRetEnsys-0.2a5-py3-none-any.whl fastapi/requirements
-cp backend/dist/InRetEnsys-0.2a5-py3-none-any.whl gui/app/requirements
+cp backend/dist/InRetEnsys-*.whl fastapi/requirements
+cp backend/dist/InRetEnsys-*.whl gui/app/requirements
 
 echo -e "\e[32mUpgrade GUI ... \e[39m"
 cd gui
