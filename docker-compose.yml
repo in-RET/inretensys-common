@@ -2,7 +2,7 @@ version: '3.8'
 services:
     fastapi:
         build: ./services/fastapi/
-        container_name: gui_fastapi
+        container_name: ensys_fastapi
         env_file:
             - ./services/fastapi/.env
         ports:
@@ -10,16 +10,13 @@ services:
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - ${LOCAL_WORKDIR}:/app/working
-        #command: ["python", "-m", "uvicorn", "api.api:app", "--host", "0.0.0.0", "--port", "8001"]
-        #command: ["gunicorn", "api.api:app", "--workers", "4", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8001"]
         networks:
             - network_intern
-
     app:
         build:
             context: ./services/gui/app
             dockerfile: ./dockerfile
-        container_name: gui_app
+        container_name: ensys_app
         restart: always
         env_file:
             - ./.env
@@ -28,11 +25,8 @@ services:
             - ${LOCAL_WORKDIR}:/src/dumps
         depends_on:
             - fastapi
-        command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-        #command: ["gunicorn", "epa.asgi:application", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8000"]
         networks:
             - network_intern
-            -
 networks:
     network_intern:
 
