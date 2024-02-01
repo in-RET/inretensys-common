@@ -102,6 +102,8 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+.env
+.env.local
 *.env
 .venv
 env/
@@ -142,3 +144,4 @@ services/
 /.idea/misc.xml
 /.idea/modules.xml
 /.idea/vcs.xml
+/.idea/dataSources.xml
