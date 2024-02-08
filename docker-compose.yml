@@ -27,6 +27,19 @@ services:
             - fastapi
         networks:
             - network_intern
+    proxy:
+        build: ./services/proxy
+        container_name: gui_proxy
+        restart: always
+        ports:
+            - ${PROXY_PORT}:80
+        depends_on:
+            - app
+        volumes:
+            - static_volume:/static
+            - ${LOCAL_WORKDIR}:/static/working
+        networks:
+            - network_intern
 networks:
     network_intern:
 
